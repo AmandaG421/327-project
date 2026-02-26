@@ -1,0 +1,25 @@
+services:
+  web:
+    image: nginx
+    ports:
+      - "8081:80"
+    depends_on:
+      - app
+
+  app:
+    build: .
+    environment:
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASS=password
+      - DB_NAME=mydatabase
+    volumes:
+      #- ./app:/app
+      - ./app:/index.html
+  db:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=mydatabase
+volumes:
+  db_data:/var/lib/mysql
