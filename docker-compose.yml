@@ -1,7 +1,7 @@
 services:
   server:
     build:
-      context: ./server
+      context: .
       dockerfile: Dockerfile.server
     ports:
       - "65432:65432"
