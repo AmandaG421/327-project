@@ -1,25 +1,27 @@
 services:
-  web:
-    image: nginx
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.server
     ports:
-      - "8081:80"
-    depends_on:
-      - app
+      - "65432:65432"
 
-  app:
-    build: .
+  client1:
+    build:
+      context: .
+      dockerfile: Dockerfile.client
     environment:
-      - DB_HOST=db
-      - DB_USER=root
-      - DB_PASS=password
-      - DB_NAME=mydatabase
-    volumes:
-      #- ./app:/app
-      - ./app:/index.html
-  #db:
-   # image: mysql:5.7
-    #environment:
-     # - MYSQL_ROOT_PASSWORD=password
-      #- MYSQL_DATABASE=mydatabase
-#volumes:
- # db_data:/var/lib/mysql
+      - SERVER_HOST=server
+      - SERVER_PORT=65432
+    depends_on:
+      - server
+
+  client2:
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+    environment:
+      - SERVER_HOST=server
+      - SERVER_PORT=65432
+    depends_on:
+      - server
