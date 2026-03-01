@@ -5,10 +5,12 @@ import os
 HOST = "0.0.0.0"
 PORT = int(os.getenv("PORT", 65432))
 
+#function to handle client connections, receive messages, and send responses
 def client_handling(conn, addr):
     print(f"Connected by {addr}")
     with conn:
         while True:
+            #receive data from the client, decode it, print it, and send a response back to the client
             data = conn.recv(1024)
             if not data:
                 break
@@ -18,6 +20,7 @@ def client_handling(conn, addr):
             conn.sendall(response.encode("utf-8"))
     print(f"Connection closed by {addr}")
 
+#main function to set up the server socket, listen for connections, and spawn threads for each client
 def main():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)

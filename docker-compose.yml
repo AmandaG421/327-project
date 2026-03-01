@@ -1,4 +1,5 @@
 services:
+  #server is built from a Dockerfile that sets up a simple TCP server
   server:
     build:
       context: .
@@ -6,13 +7,16 @@ services:
     ports:
       - "65432:65432"
 
+  #clients are built from same Dockerfile
   client1:
     build:
       context: .
       dockerfile: Dockerfile.client
+    #sets environment variables for the client to specify the server host and port
     environment:
       - SERVER_HOST=server
       - SERVER_PORT=65432
+    #depends on the server to ensure it starts before the clients
     depends_on:
       - server
 
