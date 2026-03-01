@@ -13,8 +13,8 @@ def client_handling(conn, addr):
             if not data:
                 break
             msg = data.decode("utf-8", errors="replace")
-            print(f"Received from [{addr}]:{msg}")
-            response = f"Echo: {msg}"
+            print(f"Received: {msg}")
+            response = f"Client message: {msg}"
             conn.sendall(response.encode("utf-8"))
     print(f"Connection closed by {addr}")
 
@@ -23,7 +23,7 @@ def main():
         s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         s.bind((HOST, PORT))
         s.listen()
-        print(f"[*] Server is listening on {HOST}:{PORT}")
+        print(f"Server is listening on port {PORT}")
         while True:
             conn, addr = s.accept()
             t = threading.Thread(target=client_handling, args=(conn, addr), daemon=True)
