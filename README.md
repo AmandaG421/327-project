@@ -1,4 +1,4 @@
-This project is introducing us to Docker containers, this inludes running a python based container, deploying a Nginx web server using the docker and then modyfying the Nginx server. We will also need to make multiclient servers where they are essentially 
+This project is introducing us to Docker containers, this inludes running a python based container, deploying a Nginx web server using the docker and then modyfying the Nginx server. We will also need to make multiclient servers; in ur case, we have one server and two clients.
 
 ## Running it 
 - Must have Docker installed on your system 
@@ -24,11 +24,12 @@ Run the container
 
 docker run -d -p 8080:80 --name my-nginx nginx:latest
 
-Now open http://localhost:8080 in your broswer and you should see the default Nginx page 
+Now open http://localhost:8080 in your browser and you should see the default Nginx page 
 
-## Modifying it 
+## Modifying the web server 
 
 Make sure the index.html file is updated
+
 
 ## Multi-Client Server container 
 
