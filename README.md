@@ -24,7 +24,7 @@ Run the container
 
 docker run -d -p 8080:80 --name my-nginx nginx:latest
 
-Now open http://localhost:8080 in your broswer and you should see the default Nginx page 
+Now open http://localhost:8080 in your browser and you should see the default Nginx page 
 
 ## Modifying it 
 
